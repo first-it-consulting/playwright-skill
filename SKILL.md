@@ -1,24 +1,55 @@
 ---
 name: playwright
-description: "Browser automation via remote Playwright WebSocket server. Use for taking screenshots, generating PDFs, and running remote browser tests without local browser installation."
-homepage: https://github.com/first-it-consulting/playwright-skill
-metadata:
-  {"openclaw":{"emoji":"🎭","homepage":"https://github.com/first-it-consulting/playwright-skill","requires":{"bins":["node"],"env":["PLAYWRIGHT_WS"]},"primaryEnv":"PLAYWRIGHT_WS"}}
+description: Browser automation via remote Playwright WebSocket server for screenshots, PDFs and testing.
+author: First IT Consulting
+version: 1.0.0
 ---
 
-# Playwright
+# Playwright Skill
 
-Remote browser automation via WebSocket server. No local browsers needed.
+Remote browser automation via Playwright WebSocket server. No local browser installation required.
+
+## Use Cases
+
+| Task | Script | Description |
+|------|--------|-------------|
+| Screenshot | `scripts/screenshot.js` | Capture screenshots of web pages |
+| PDF | `scripts/pdf-export.js` | Generate PDFs from URLs |
+| Test | `scripts/test-runner.js` | Run Playwright tests remotely |
+
+## Installation
+
+```bash
+cd playwright-skill
+npm install
+export PLAYWRIGHT_WS=ws://your-server:3000
+```
 
 ## Quick Start
 
 ```bash
-export PLAYWRIGHT_WS=ws://your-server:3000
+# Screenshot
 node scripts/screenshot.js https://example.com screenshot.png --full-page
+
+# PDF
 node scripts/pdf-export.js https://example.com page.pdf
 ```
 
+## Configuration
+
+Set `PLAYWRIGHT_WS` environment variable to your Playwright WebSocket URL:
+
+```bash
+export PLAYWRIGHT_WS=ws://your-playwright-server:3000
+```
+
+## Scripts
+
+- `screenshot.js` - Take screenshots with options
+- `pdf-export.js` - Generate PDFs
+- `test-runner.js` - Run remote tests
+
 ## References
 
-- [Selector Strategies](references/selectors.md)
-- [API Reference](references/api-reference.md)
+- `references/selectors.md` - Selector strategies
+- `references/api-reference.md` - API documentation

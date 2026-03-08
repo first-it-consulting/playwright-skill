@@ -1,54 +1,23 @@
 {
-  "name": "@first-it-consulting/playwright-skill",
-  "version": "0.0.0-development",
-  "description": "OpenClaw skill for remote Playwright browser automation via WebSocket",
-  "main": "index.js",
+  "name": "playwright-skill",
+  "version": "1.0.0",
+  "description": "Remote Playwright browser automation for screenshots and PDFs",
+  "main": "scripts/screenshot.js",
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
-    "lint": "eslint scripts/ tests/",
     "screenshot": "node scripts/screenshot.js",
     "pdf": "node scripts/pdf-export.js",
-    "package:skill": "node scripts/package-skill.js"
+    "test": "bash test.sh"
   },
   "keywords": [
     "playwright",
     "browser-automation",
-    "openclaw",
-    "skill",
     "screenshot",
     "pdf",
     "websocket"
   ],
   "author": "First IT Consulting",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/first-it-consulting/playwright-skill.git"
-  },
-  "bugs": {
-    "url": "https://github.com/first-it-consulting/playwright-skill/issues"
-  },
-  "homepage": "https://github.com/first-it-consulting/playwright-skill#readme",
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "eslint": "^8.57.0"
-  },
   "dependencies": {
     "playwright": "^1.40.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coverageDirectory": "coverage",
-    "collectCoverageFrom": [
-      "scripts/**/*.js"
-    ],
-    "testMatch": [
-      "**/tests/**/*.test.js"
-    ]
   }
 }
