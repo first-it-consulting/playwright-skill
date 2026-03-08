@@ -1,8 +1,7 @@
 ---
 name: playwright
 description: Browser automation via remote Playwright WebSocket server for screenshots, PDFs and testing.
-author: First IT Consulting
-version: 1.0.0
+metadata: {"clawdbot":{"emoji":"🎭","requires":{"bins":["node"],"env":["PLAYWRIGHT_WS"]},"primaryEnv":"PLAYWRIGHT_WS"}}
 ---
 
 # Playwright Skill
