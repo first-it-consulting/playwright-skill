@@ -32,13 +32,6 @@ jobs:
     
     - name: Run tests
       run: npm test
-    
-    - name: Upload coverage
-      uses: codecov/codecov-action@v4
-      if: matrix.node-version == '20.x'
-      with:
-        files: ./coverage/lcov.info
-        fail_ci_if_error: false
 
   validate-skill:
     runs-on: ubuntu-latest
@@ -94,4 +87,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: playwright-skill
-        path: playwright.skill
+        path: '*.skill'
