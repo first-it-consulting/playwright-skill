@@ -37,6 +37,6 @@ describe('Skill Structure', () => {
 
   test('should have proper YAML frontmatter in SKILL.md', () => {
     const skill = fs.readFileSync(path.join(skillDir, 'SKILL.md'), 'utf8');
-    expect(skill).toMatch(/^---\nname: playwright\ndescription:/);
+    expect(skill).toMatch(/^---\nname: playwright-ws\ndescription:/);
   });
 });

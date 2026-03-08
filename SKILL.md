@@ -1,5 +1,5 @@
 ---
-name: playwright
+name: playwright-ws
 description: Browser automation via remote Playwright WebSocket server for screenshots, PDFs and testing.
 metadata: {"clawdbot":{"emoji":"🎭","requires":{"bins":["node"],"env":["PLAYWRIGHT_WS"]},"primaryEnv":"PLAYWRIGHT_WS"}}
 ---
