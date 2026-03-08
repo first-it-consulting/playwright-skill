@@ -16,10 +16,10 @@
 
 ## 🚀 Quick Start
 
-### 1. Configure Server URL
+### 1. Configure WebSocket URL
 
 ```bash
-export PLAYWRIGHT_SERVER=http://your-playwright-server:3000
+export PLAYWRIGHT_WS=ws://your-playwright-server:3000
 ```
 
 ### 2. Take a Screenshot
@@ -57,50 +57,46 @@ node scripts/test-runner.js --headed --project=chromium
 git clone https://github.com/first-it-consulting/playwright-skill.git
 cd playwright-skill
 
-# Install dependencies (for local fallback only)
+# Install dependencies
 npm install
 ```
 
 ## 📚 API Reference
 
-### Screenshot Endpoint
+Your Playwright server must expose a WebSocket endpoint for browser connections:
+
+```
+WS ws://your-server:3000/
+```
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PLAYWRIGHT_WS` | `ws://localhost:3000` | WebSocket URL of Playwright server |
+
+### Screenshot Options
 
 ```javascript
-POST /screenshot
-Content-Type: application/json
-
 {
-  "url": "https://example.com",
-  "fullPage": false,
-  "viewport": { "width": 1280, "height": 720 },
-  "waitForSelector": null,
-  "delay": 0,
-  "format": "png"
+  fullPage: false,        // Capture full page or viewport
+  viewport: { width: 1280, height: 720 },
+  waitForSelector: null,  // Wait for element before screenshot
+  delay: 0,               // Delay in ms after load
+  type: 'png'             // 'png' or 'jpeg'
 }
 ```
 
-### PDF Endpoint
+### PDF Options
 
 ```javascript
-POST /pdf
-Content-Type: application/json
-
 {
-  "url": "https://example.com",
-  "format": "A4",
-  "landscape": false,
-  "margin": { "top": "1cm", "right": "1cm", "bottom": "1cm", "left": "1cm" },
-  "printBackground": true
+  format: 'A4',           // Page format
+  landscape: false,       // Landscape orientation
+  margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' },
+  printBackground: true   // Include background graphics
 }
 ```
-
-### WebSocket Endpoint
-
-```
-WS /ws
-```
-
-Used for test execution via `PW_TEST_CONNECT_WS_ENDPOINT`.
 
 ## 📖 Documentation
 
@@ -122,30 +118,33 @@ npm test -- tests/screenshot.test.js
 
 ## 🛠️ Server Setup
 
-Your Playwright server should expose these endpoints:
+Your Playwright server should expose a WebSocket endpoint for browser connections:
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/screenshot` | POST | Capture screenshots |
-| `/pdf` | POST | Generate PDFs |
-| `/ws` | WS | Browser WebSocket for tests |
+```
+WS ws://your-server:3000/
+```
 
-Example server implementation:
+### Example Server Implementation
 
 ```javascript
 const { chromium } = require('playwright');
-const express = require('express');
-const app = express();
 
-app.post('/screenshot', async (req, res) => {
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.goto(req.body.url);
-  const screenshot = await page.screenshot({ fullPage: req.body.fullPage });
-  await browser.close();
-  res.set('Content-Type', 'image/png');
-  res.send(screenshot);
-});
+(async () => {
+  const browserServer = await chromium.launchServer({
+    headless: true,
+    port: 3000
+  });
+  
+  console.log(`WebSocket endpoint: ${browserServer.wsEndpoint()}`);
+  // ws://localhost:3000/
+})();
+```
+
+Or using Docker:
+
+```bash
+docker run -p 3000:3000 mcr.microsoft.com/playwright:v1.40.0-jammy \
+  npx playwright launch-server chromium
 ```
 
 ## 🤝 Contributing

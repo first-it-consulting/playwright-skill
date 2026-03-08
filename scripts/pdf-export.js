@@ -1,6 +1,7 @@
+const { chromium } = require('playwright');
 const fs = require('fs');
 
-const PLAYWRIGHT_SERVER = process.env.PLAYWRIGHT_SERVER || 'http://localhost:3000';
+const PLAYWRIGHT_WS = process.env.PLAYWRIGHT_WS || 'ws://localhost:3000';
 
 async function generatePDF(url, outputPath, options = {}) {
   const {
@@ -12,28 +13,36 @@ async function generatePDF(url, outputPath, options = {}) {
     delay = 0
   } = options;
 
-  const response = await fetch(`${PLAYWRIGHT_SERVER}/pdf`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      url,
+  let browser;
+  try {
+    // Connect to remote Playwright server via WebSocket
+    browser = await chromium.connect(PLAYWRIGHT_WS);
+    
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    
+    await page.goto(url, { waitUntil: 'networkidle' });
+    
+    if (waitForSelector) {
+      await page.waitForSelector(waitForSelector, { timeout: 10000 });
+    }
+    
+    if (delay > 0) {
+      await page.waitForTimeout(delay);
+    }
+    
+    await page.pdf({
+      path: outputPath,
       format,
       landscape,
       margin,
-      printBackground,
-      waitForSelector,
-      delay
-    })
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`PDF generation failed: ${error}`);
+      printBackground
+    });
+    
+    console.log(`PDF saved: ${outputPath}`);
+  } finally {
+    if (browser) await browser.close();
   }
-
-  const buffer = Buffer.from(await response.arrayBuffer());
-  fs.writeFileSync(outputPath, buffer);
-  console.log(`PDF saved: ${outputPath}`);
 }
 
 // CLI usage
@@ -45,6 +54,9 @@ if (require.main === module) {
   if (!url) {
     console.log('Usage: node pdf-export.js <url> [output-path] [options]');
     console.log('Options: --format=A4|Letter|Legal, --landscape, --wait-for=selector, --delay=ms');
+    console.log('');
+    console.log('Environment:');
+    console.log('  PLAYWRIGHT_WS=ws://your-server:3000  WebSocket URL of Playwright server');
     process.exit(1);
   }
   
@@ -55,7 +67,10 @@ if (require.main === module) {
     delay: parseInt(args.find(a => a.startsWith('--delay='))?.split('=')[1] || '0')
   };
   
-  generatePDF(url, outputPath, options).catch(console.error);
+  generatePDF(url, outputPath, options).catch(err => {
+    console.error('Error:', err.message);
+    process.exit(1);
+  });
 }
 
 module.exports = { generatePDF };

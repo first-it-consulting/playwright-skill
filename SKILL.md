@@ -1,17 +1,17 @@
 ---
 name: playwright
-description: "Browser automation via Playwright server. Use when (1) Remote browser automation through Playwright server, (2) Taking screenshots or generating PDFs via API, (3) Running browser tasks without local browser installation, (4) Distributed browser automation across network. Set PLAYWRIGHT_SERVER environment variable to your server URL."
+description: "Browser automation via Playwright WebSocket server. Use when (1) Remote browser automation through Playwright WebSocket server, (2) Taking screenshots or generating PDFs via remote browser, (3) Running browser tasks without local browser installation, (4) Distributed browser automation across network. Set PLAYWRIGHT_WS environment variable to WebSocket URL."
 ---
 
 # Playwright
 
 ## Overview
 
-This skill provides browser automation via a **remote Playwright server**. No local browser installation required — all browser tasks are executed on the remote server.
+This skill provides browser automation via a **remote Playwright WebSocket server**. No local browser installation required — all browser tasks are executed on the remote server.
 
-**Configuration:** Set the `PLAYWRIGHT_SERVER` environment variable to your Playwright server URL:
+**Configuration:** Set the `PLAYWRIGHT_WS` environment variable to your Playwright WebSocket URL:
 ```bash
-export PLAYWRIGHT_SERVER=http://your-playwright-server:3000
+export PLAYWRIGHT_WS=ws://your-playwright-server:3000
 ```
 
 For local Playwright usage (if server unavailable), standard Playwright installation applies.
