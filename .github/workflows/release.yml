@@ -70,8 +70,17 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         body: ${{ steps.release_notes.outputs.notes }}
-        files: |
-          playwright.skill
+        files: '*.skill'
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Publish to ClawHub
+      run: |
+        npx clawhub@latest publish . \
+          --slug playwright-ws \
+          --name "Playwright WS" \
+          --version ${{ steps.get_version.outputs.version }} \
+          --changelog "${{ steps.release_notes.outputs.notes }}"
+      env:
+        CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
