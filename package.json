@@ -1,0 +1,41 @@
+{
+  "name": "playwright-skill",
+  "version": "1.0.0",
+  "description": "OpenClaw skill for remote Playwright browser automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint scripts/ tests/",
+    "screenshot": "node scripts/screenshot.js",
+    "pdf": "node scripts/pdf-export.js"
+  },
+  "keywords": [
+    "playwright",
+    "browser-automation",
+    "openclaw",
+    "skill",
+    "screenshot",
+    "pdf"
+  ],
+  "author": "First IT Consulting",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "scripts/**/*.js"
+    ],
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  }
+}

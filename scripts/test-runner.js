@@ -1,6 +1,6 @@
 const { execSync } = require('child_process');
 
-const PLAYWRIGHT_SERVER = process.env.PLAYWRIGHT_SERVER || 'http://playwright.first-it-consulting.com:30150';
+const PLAYWRIGHT_SERVER = process.env.PLAYWRIGHT_SERVER || 'http://localhost:3000';
 
 function runTests(options = {}) {
   const {

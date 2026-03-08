@@ -1,13 +1,18 @@
 ---
 name: playwright
-description: "Browser automation via Playwright server. Use when (1) Remote browser automation through Playwright server at http://playwright.first-it-consulting.com:30150, (2) Taking screenshots or generating PDFs via API, (3) Running browser tasks without local browser installation, (4) Distributed browser automation across network."
+description: "Browser automation via Playwright server. Use when (1) Remote browser automation through Playwright server, (2) Taking screenshots or generating PDFs via API, (3) Running browser tasks without local browser installation, (4) Distributed browser automation across network. Set PLAYWRIGHT_SERVER environment variable to your server URL."
 ---
 
 # Playwright
 
 ## Overview
 
-This skill provides browser automation via a **remote Playwright server** at `http://playwright.first-it-consulting.com:30150`. No local browser installation required — all browser tasks are executed on the remote server.
+This skill provides browser automation via a **remote Playwright server**. No local browser installation required — all browser tasks are executed on the remote server.
+
+**Configuration:** Set the `PLAYWRIGHT_SERVER` environment variable to your Playwright server URL:
+```bash
+export PLAYWRIGHT_SERVER=http://your-playwright-server:3000
+```
 
 For local Playwright usage (if server unavailable), standard Playwright installation applies.
 
