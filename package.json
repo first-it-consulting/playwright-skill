@@ -1,7 +1,7 @@
 {
-  "name": "playwright-skill",
+  "name": "@first-it-consulting/playwright-skill",
   "version": "1.0.0",
-  "description": "OpenClaw skill for remote Playwright browser automation",
+  "description": "OpenClaw skill for remote Playwright browser automation via WebSocket",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -9,7 +9,8 @@
     "test:watch": "jest --watch",
     "lint": "eslint scripts/ tests/",
     "screenshot": "node scripts/screenshot.js",
-    "pdf": "node scripts/pdf-export.js"
+    "pdf": "node scripts/pdf-export.js",
+    "package:skill": "node scripts/package-skill.js"
   },
   "keywords": [
     "playwright",
@@ -17,13 +18,25 @@
     "openclaw",
     "skill",
     "screenshot",
-    "pdf"
+    "pdf",
+    "websocket"
   ],
   "author": "First IT Consulting",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/first-it-consulting/playwright-skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/first-it-consulting/playwright-skill/issues"
+  },
+  "homepage": "https://github.com/first-it-consulting/playwright-skill#readme",
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -37,8 +50,5 @@
     "testMatch": [
       "**/tests/**/*.test.js"
     ]
-  },
-  "dependencies": {
-    "playwright": "^1.58.2"
   }
 }
