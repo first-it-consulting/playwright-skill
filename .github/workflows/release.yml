@@ -40,7 +40,10 @@ jobs:
     
     - name: Update version in package.json
       run: |
-        npm version ${{ steps.get_version.outputs.version }} --no-git-tag-version
+        # Use jq to update version instead of npm version (which fails if already set)
+        jq '.version = "${{ steps.get_version.outputs.version }}"' package.json > package.json.tmp
+        mv package.json.tmp package.json
+        cat package.json | grep version
     
     - name: Build skill package
       run: |

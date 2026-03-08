@@ -1,6 +1,6 @@
 {
   "name": "@first-it-consulting/playwright-skill",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "OpenClaw skill for remote Playwright browser automation via WebSocket",
   "main": "index.js",
   "scripts": {
