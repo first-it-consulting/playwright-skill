@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.1] - 2026-03-11
+## [1.0.0] - 2026-03-11
 
 ### Fixed
 - Security: replace `execSync` string concatenation with `spawnSync` array args in `test-runner.js`, `package-skill.js`, and `package-for-clawhub.js` to prevent shell injection (RCE)
@@ -31,6 +31,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `test-runner.js` - Execute Playwright tests on remote server
 - WebSocket connection support via `PLAYWRIGHT_WS` environment variable
 
-[Unreleased]: https://github.com/first-it-consulting/playwright-skill/compare/v1.0.1...HEAD
-[1.0.1]: https://github.com/first-it-consulting/playwright-skill/compare/v1.0.0...v1.0.1
+[Unreleased]: https://github.com/first-it-consulting/playwright-skill/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/first-it-consulting/playwright-skill/releases/tag/v1.0.0
