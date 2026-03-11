@@ -76,11 +76,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish to ClawHub
+      # NOTE: clawhub CLI publish is currently broken server-side (acceptLicenseTerms
+      # required by the API but not exposed by the CLI). Use web UI as workaround.
+      # Track: https://github.com/openclaw/clawhub
       run: |
         npx clawhub@latest publish . \
           --slug playwright-ws \
           --name "Playwright WS" \
           --version ${{ steps.get_version.outputs.version }} \
-          --changelog "${{ steps.release_notes.outputs.notes }}"
+          --changelog "${{ steps.release_notes.outputs.notes }}" || \
+          echo "::warning::ClawHub publish failed - publish manually at https://clawhub.ai/upload"
       env:
         CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
