@@ -1,6 +1,6 @@
 const { spawnSync } = require('child_process');
 
-const PLAYWRIGHT_SERVER = process.env.PLAYWRIGHT_SERVER || 'http://localhost:3000';
+const PLAYWRIGHT_WS = process.env.PLAYWRIGHT_WS || 'ws://localhost:3000';
 
 // Allowed values for reporter to prevent injection
 const ALLOWED_REPORTERS = ['list', 'line', 'dot', 'json', 'junit', 'html', 'github', 'blob', 'null'];
@@ -24,8 +24,8 @@ function runTests(options = {}) {
   // Set server endpoint for Playwright to use remote browser
   const env = {
     ...process.env,
-    PLAYWRIGHT_SERVER,
-    PW_TEST_CONNECT_WS_ENDPOINT: `${PLAYWRIGHT_SERVER}/ws`
+    PLAYWRIGHT_WS,
+    PW_TEST_CONNECT_WS_ENDPOINT: PLAYWRIGHT_WS
   };
 
   // Build args array — never concatenate user input into a shell string
@@ -39,7 +39,7 @@ function runTests(options = {}) {
   if (safeRetries > 0) args.push(`--retries=${safeRetries}`);
   if (safeWorkers !== undefined) args.push(`--workers=${safeWorkers}`);
 
-  console.log(`Running tests via server: ${PLAYWRIGHT_SERVER}`);
+  console.log(`Running tests via server: ${PLAYWRIGHT_WS}`);
   console.log(`Args: ${args.join(' ')}`);
 
   const result = spawnSync('npx', args, { stdio: 'inherit', cwd: process.cwd(), env });
