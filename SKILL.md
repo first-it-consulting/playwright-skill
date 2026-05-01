@@ -8,6 +8,8 @@ metadata: {"clawdbot":{"emoji":"🎭","requires":{"bins":["node"],"env":["PLAYWR
 
 Remote browser automation via Playwright WebSocket server. No local browser installation required.
 
+> **Privacy notice:** The configured WebSocket server can observe all requested URLs, page contents, screenshots, and test interactions. Use only a Playwright server you control or fully trust, and avoid routing sensitive sites through untrusted infrastructure.
+
 ## Use Cases
 
 | Task | Script | Description |

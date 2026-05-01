@@ -17,6 +17,11 @@
   ],
   "author": "First IT Consulting",
   "license": "MIT",
+  "homepage": "https://github.com/first-it-consulting/playwright-skill#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/first-it-consulting/playwright-skill.git"
+  },
   "dependencies": {
     "playwright": "^1.40.0"
   }

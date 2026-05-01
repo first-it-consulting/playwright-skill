@@ -27,7 +27,7 @@ echo "✅ Ready to use"
 if [ -z "$PLAYWRIGHT_WS" ]; then
     echo "⚠️  Note: Set PLAYWRIGHT_WS environment variable for testing"
 else
-    echo "✅ PLAYWRIGHT_WS is set: $PLAYWRIGHT_WS"
+    echo "✅ PLAYWRIGHT_WS is set"
 fi
 
 echo ""

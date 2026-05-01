@@ -39,7 +39,7 @@ function runTests(options = {}) {
   if (safeRetries > 0) args.push(`--retries=${safeRetries}`);
   if (safeWorkers !== undefined) args.push(`--workers=${safeWorkers}`);
 
-  console.log(`Running tests via server: ${PLAYWRIGHT_WS}`);
+  console.log('Running tests via remote Playwright server');
   console.log(`Args: ${args.join(' ')}`);
 
   const result = spawnSync('npx', args, { stdio: 'inherit', cwd: process.cwd(), env });
